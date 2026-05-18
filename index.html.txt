@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>ReportFlow - Sistema de Relatórios</title>
+    
+    <!-- Scripts e Fontes -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+                "surface-container-high": "#e6e8ea",
+                "primary": "#000000",
+                "secondary": "#006a61",
+                "surface": "#f7f9fb",
+                "outline-variant": "#c6c6cd"
+            },
+            borderRadius: {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            }
+          },
+        },
+      }
+    </script>
+
+    <style>
+        body {
+            background-color: #f7f9fb;
+            color: #191c1e;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        .material-symbols-outlined { font-size: 24px; }
+    </style>
+</head>
+
+<body class="min-h-screen pb-24">
+
+<!-- Cabeçalho -->
+<header class="bg-white sticky top-0 border-b border-outline-variant shadow-sm z-50">
+    <div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-secondary">analytics</span>
+            <h1 class="text-xl font-bold text-primary">ReportFlow</h1>
+        </div>
+        
+        <nav class="hidden md:flex items-center gap-6">
+            <button class="text-sm font-semibold hover:text-secondary">Dashboard</button>
+            <button class="text-sm font-semibold hover:text-secondary">Formulários</button>
+            <button class="text-sm font-bold text-secondary border-b-2 border-secondary">Relatórios</button>
+            <button class="text-sm font-semibold hover:text-secondary">Perfil</button>
+        </nav>
+
+        <div class="w-10 h-10 rounded-full bg-gray-200 border border-gray-300 overflow-hidden">
+            <img src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg" alt="User">
+        </div>
+    </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-6 py-8">
+    <!-- Título e Estatísticas -->
+    <div class="mb-8">
+        <h2 class="text-3xl font-bold mb-2">Histórico de Relatórios</h2>
+        <p class="text-gray-600">Gerencie e visualize todos os seus relatórios emitidos.</p>
+    </div>
+
+    <!-- Filtros e Busca -->
+    <div class="flex flex-col md:flex-row gap-4 mb-8">
+        <div class="flex-1 relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+            <input id="searchInput" class="w-full pl-10 pr-4 py-3 bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-secondary outline-none transition-all" placeholder="Buscar por nome do relatório..." type="text">
+        </div>
+        <button class="flex items-center justify-center gap-2 px-6 py-3 bg-white border border-gray-300 rounded-xl hover:bg-gray-50 transition-colors">
+            <span class="material-symbols-outlined">filter_list</span>
+            Filtrar
+        </button>
+    </div>
+
+    <!-- Lista de Relatórios -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="reportGrid">
+        
+        <!-- Item 1 -->
+        <div class="glass-card p-5 rounded-xl shadow-sm hover:shadow-md transition-all group border-l-4 border-l-green-500">
+            <div class="flex justify-between items-start mb-4">
+                <div class="p-2 bg-gray-100 rounded-lg"><span class="material-symbols-outlined">description</span></div>
+                <span class="text-[10px] font-bold bg-green-100 text-green-700 px-2 py-1 rounded">ENVIADO</span>
+            </div>
+            <h4 class="font-bold text-gray-800 mb-1">Performance Industrial</h4>
+            <p class="text-xs text-gray-500 mb-4">Emitido em: 14/06/2024</p>
+            <button onclick="alert('Abrindo Relatório...')" class="w-full py-2 text-sm font-bold text-secondary border border-secondary rounded-lg hover:bg-secondary hover:text-white transition-all">Visualizar</button>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="glass-card p-5 rounded-xl shadow-sm hover:shadow-md transition-all group border-l-4 border-l-amber-500">
+            <div class="flex justify-between items-start mb-4">
+                <div class="p-2 bg-gray-100 rounded-lg"><span class="material-symbols-outlined">pending_actions</span></div>
+                <span class="text-[10px] font-bold bg-amber-100 text-amber-700 px-2 py-1 rounded">PENDENTE</span>
+            </div>
+            <h4 class="font-bold text-gray-800 mb-1">Auditoria de Segurança</h4>
+            <p class="text-xs text-gray-500 mb-4">Prazo: 12/06/2024</p>
+            <button class="w-full py-2 text-sm font-bold bg-secondary text-white rounded-lg hover:opacity-90">Completar</button>
+        </div>
+
+    </div>
+</main>
+
+<!-- Navegação Mobile -->
+<nav class="fixed bottom-0 left-0 w-full bg-white border-t flex justify-around p-3 md:hidden">
+    <button class="flex flex-col items-center text-gray-500"><span class="material-symbols-outlined">dashboard</span><span class="text-[10px]">Início</span></button>
+    <button class="flex flex-col items-center text-secondary"><span class="material-symbols-outlined">assessment</span><span class="text-[10px]">Relatórios</span></button>
+    <button class="flex flex-col items-center text-gray-500"><span class="material-symbols-outlined">person</span><span class="text-[10px]">Perfil</span></button>
+</nav>
+
+<script>
+    // Lógica simples de busca
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+        let term = e.target.value.toLowerCase();
+        let cards = document.querySelectorAll('#reportGrid > div');
+        
+        cards.forEach(card => {
+            let title = card.querySelector('h4').innerText.toLowerCase();
+            card.style.display = title.includes(term) ? 'block' : 'none';
+        });
+    });
+</script>
+
+</body>
+</html>
